@@ -1,0 +1,17 @@
+name: Swift Build & Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile and run main.swift
+        run: |
+          swiftc main.swift -o main
+          ./main
+
+      - name: Build Docker image
+        run: docker build -t sh8urtf:latest .
